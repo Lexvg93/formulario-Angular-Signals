@@ -1,0 +1,30 @@
+<form (submit)="enviar(); $event.preventDefault()">
+    <label >
+        Nombre:
+        <input type="text" [formField]="contactoForm.nombre">
+    </label>
+    @if (contactoForm.nombre().touched() && contactoForm.nombre().invalid()){
+        <ul>
+            @for(error of contactoForm.nombre().errors(); track error){
+                <li>{{error.message}}</li>
+            }
+        </ul>
+    }
+
+    <label>
+        Email:
+        <input type="text" [formField]="contactoForm.email">
+    </label>
+    @if (contactoForm.email().touched() && contactoForm.email().invalid()){
+        <ul>
+            @for(error of contactoForm.email().errors(); track error){
+                <li>{{error.message}}</li>
+            }
+        </ul>
+    }
+
+    <h3>Vista previa:</h3>
+    <p>Nombre: {{contactoForm.nombre().value()}}</p>
+    <p>Email: {{contactoForm.email().value()}}</p>
+    <button type="submit">Enviar</button>
+</form>
